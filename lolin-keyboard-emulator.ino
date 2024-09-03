@@ -8,7 +8,7 @@
 /**************************/
 /* << CONFIG */
 
-#define VERSION "1.0.0"
+#define VERSION "1.0.1"
 
 // KEYPAD
 const byte ROWS = 4; // num of rows
@@ -47,37 +47,44 @@ void loop()
 
   if (key)
   {
+    Serial.print("KEY: ");
     Serial.println(key);
     if (bleKeyboard.isConnected())
     {
       // adapt here to send different keys values
-      if (key == '1')
+      if (key == '0')
+      {
+        bleKeyboard.write(KEY_NUM_0);
+      }
+      else if (key == '1')
       {
         bleKeyboard.write(KEY_NUM_1);
       }
       else if (key == '2')
       {
+        // bleKeyboard.write(KEY_LEFT_SHIFT);
         bleKeyboard.write(KEY_NUM_2);
       }
       else if (key == '3')
       {
+        // bleKeyboard.write(KEY_LEFT_SHIFT);
         bleKeyboard.write(KEY_NUM_3);
       }
       else if (key == '4')
       {
-        bleKeyboard.write(KEY_NUM_4);
+        bleKeyboard.write(KEY_LEFT_ARROW);
       }
       else if (key == '5')
       {
-        bleKeyboard.write(KEY_NUM_5);
+        bleKeyboard.write(KEY_DOWN_ARROW);
       }
       else if (key == '6')
       {
-        bleKeyboard.write(KEY_NUM_6);
+        bleKeyboard.write(KEY_UP_ARROW);
       }
       else if (key == '8')
       {
-        bleKeyboard.write(KEY_NUM_8);
+        bleKeyboard.write(0x20); // space
       }
       else if (key == '9')
       {
@@ -85,25 +92,21 @@ void loop()
       }
       else if (key == '7')
       {
-        bleKeyboard.write(KEY_LEFT_ARROW);
-      }
-      else if (key == '*')
-      {
         bleKeyboard.write(KEY_RIGHT_ARROW);
-      }
-      else if (key == '0')
-      {
-        bleKeyboard.write(KEY_DOWN_ARROW);
       }
       else if (key == 'A')
       {
         bleKeyboard.write('Q');
       }
-      else if (key == '#')
+      else if (key == 'B')
       {
-        bleKeyboard.press(KEY_LEFT_SHIFT);
-        bleKeyboard.press('@');
-        bleKeyboard.releaseAll();
+        bleKeyboard.write(KEY_LEFT_SHIFT);
+        bleKeyboard.write('P');
+      }
+      else if (key == 'C')
+      {
+        bleKeyboard.write(KEY_LEFT_SHIFT);
+        bleKeyboard.write('N');
       }
       else
       {
